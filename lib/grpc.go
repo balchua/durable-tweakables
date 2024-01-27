@@ -11,17 +11,18 @@ type GRPCClient struct {
 	client msg_source.MessageSourceClient
 }
 
-func (m *GRPCClient) Receive(batch int) error {
-	_, err := m.client.Receive(context.Background(), &msg_source.GetRequest{
+func (m *GRPCClient) Receive(batch int32) ([]byte, error) {
+	resp, err := m.client.Receive(context.Background(), &msg_source.GetRequest{
 		Batch: int32(batch),
 	})
-	return err
+	return resp.Value, err
 }
 
 // Here is the gRPC server that GRPCClient talks to.
 type GRPCServer struct {
 	// This is the real implementation
 	Impl MessageSource
+	msg_source.UnimplementedMessageSourceServer
 }
 
 func (m *GRPCServer) Receive(

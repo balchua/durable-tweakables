@@ -1,3 +1,7 @@
 go 1.21.6
 
-use ./lib
+use (
+	./lib
+	./plugin
+	./server
+)

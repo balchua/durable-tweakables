@@ -35,7 +35,7 @@ func NewMessageSourceClient(cc grpc.ClientConnInterface) MessageSourceClient {
 
 func (c *messageSourceClient) Receive(ctx context.Context, in *GetRequest, opts ...grpc.CallOption) (*GetResponse, error) {
 	out := new(GetResponse)
-	err := c.cc.Invoke(ctx, "/tweakable.io.MessageSource/Receive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/msg_source.MessageSource/Receive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -80,7 +80,7 @@ func _MessageSource_Receive_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/tweakable.io.MessageSource/Receive",
+		FullMethod: "/msg_source.MessageSource/Receive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MessageSourceServer).Receive(ctx, req.(*GetRequest))
@@ -92,7 +92,7 @@ func _MessageSource_Receive_Handler(srv interface{}, ctx context.Context, dec fu
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MessageSource_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "tweakable.io.MessageSource",
+	ServiceName: "msg_source.MessageSource",
 	HandlerType: (*MessageSourceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
