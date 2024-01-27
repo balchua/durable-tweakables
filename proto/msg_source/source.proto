@@ -1,0 +1,20 @@
+// Copyright (c) HashiCorp, Inc.
+// SPDX-License-Identifier: MPL-2.0
+
+syntax = "proto3";
+package tweakable.io;
+option go_package = "./msg_source";
+
+message GetRequest {
+    int32 batch = 1;
+}
+
+message GetResponse {
+    bytes value = 1;
+}
+
+message Empty {}
+
+service MessageSource {
+    rpc Receive(GetRequest) returns (GetResponse);
+}
