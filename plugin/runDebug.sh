@@ -1,0 +1,2 @@
+#make sure plugin output is "original" without debugger messages by passing log-dest & tty arguments
+dlv --listen=:40000 --headless=true --api-version=2 --accept-multiclient --log-dest "dlv.log" --tty="" exec /home/thor/workspace/durable-tweakables/plugin/sample-plugin -- "$@"
